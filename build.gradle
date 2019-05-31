@@ -1,0 +1,68 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.5.RELEASE'
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.github.shk0da'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+ext {
+    set('ignite', '2.7.0')
+    set('h2database', '1.4.197')
+    set('hikariCP', '3.3.1')
+    set('swagger2', '2.9.2')
+    set('httpclient', '4.5.8')
+    set('restassured', '3.0.0')
+    set('akka', '2.5.7')
+    set('retry', '1.2.4.RELEASE')
+    set('lombok', '1.18.8')
+    set('jackson', '2.9.9')
+    set('commonsLang3', '3.9')
+}
+
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-aop'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-configuration-processor'
+    compile 'org.springframework.boot:spring-boot-starter-validation'
+    compile "org.springframework.retry:spring-retry:$retry"
+    compile "com.typesafe.akka:akka-actor_2.11:$akka"
+
+    compile "com.zaxxer:HikariCP:$hikariCP"
+    compile "org.apache.ignite:ignite-core:$ignite"
+    compile "org.apache.ignite:ignite-spring:$ignite"
+    compile "org.apache.ignite:ignite-indexing:$ignite"
+    compile "org.apache.ignite:ignite-slf4j:$ignite"
+    compile "org.apache.ignite:ignite-spring-data:$ignite"
+
+    compile "org.postgresql:postgresql"
+
+    compile "com.fasterxml.jackson.core:jackson-core:$jackson"
+    compile "com.fasterxml.jackson.core:jackson-databind:$jackson"
+    compile "org.apache.commons:commons-lang3:$commonsLang3"
+
+    runtime "com.h2database:h2:$h2database"
+    compile "io.springfox:springfox-swagger2:$swagger2"
+    compile "io.springfox:springfox-swagger-ui:$swagger2"
+    compile "org.apache.httpcomponents:httpclient:$httpclient"
+    compileOnly "org.projectlombok:lombok:$lombok"
+    testCompile "io.rest-assured:rest-assured:$restassured"
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}

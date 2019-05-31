@@ -1,0 +1,45 @@
+spring:
+  main:
+    banner-mode: console
+    allow-bean-definition-overriding: true
+  application:
+    basic-name: DemoApp - Spring data with Ignite and Postgres cluster
+    name: ${spring.application.basic-name}
+  profiles:
+    active: prod
+  primary.datasource:
+    url: jdbc:postgresql://localhost:5432/demo
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  replica.datasource:
+    url: jdbc:postgresql://localhost:5432/demo
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      javax.persistence.sharedCache.mode: ALL
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate.id.new_generator_mapping: true
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: false
+      hibernate.cache.region.factory_class: com.github.shk0da.demo.persistence.cache.hibernate.HibernateRegionFactory
+      hibernate.order_updates: true
+      hibernate.order_inserts: true
+      hibernate.jdbc.batch_versioned_data: true
+      hibernate.jdbc.fetch_size: 25
+      hibernate.jdbc.batch_size: 25
+      hibernate.jdbc.lob.non_contextual_creation: true
+
+ignite.discovery.nodes:
+  - localhost:47500
+  - localhost:47501
+ignite.datastorage.memory-off-heap-max-mb: 2048
+ignite.datastorage.persistence-enabled: false
+ignite.datastorage.storage-path: ./demo/storage
+ignite.datastorage.wal-path: ./demo/db/wal
+ignite.datastorage.wal-archive-path: ./demo/db/wal/archive

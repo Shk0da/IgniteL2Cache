@@ -1,0 +1,7 @@
+spring.application.name: ${spring.application.basic-name} (Production mode) K8s
+spring.profiles.include: prod
+ignite.k8s.shared: true
+ignite.k8s.accountToken: /etc/service/name/accessToken
+ignite.k8s.masterUrl: http://localhost:8080
+ignite.k8s.namespace: demo-app-test
+ignite.k8s.serviceName: demo

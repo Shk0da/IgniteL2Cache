@@ -1,0 +1,11 @@
+spring.application.name: ${spring.application.basic-name} (Production mode) Node2
+spring.profiles.include: prod
+server.port: 8021
+management.port: 8022
+ignite.discovery.localPort: 47502
+ignite.discovery.nodes:
+  - localhost:47500
+  - localhost:47501
+ignite.communication.local-port: 47102
+ignite.communication.sharedMemoryPort: 47002
+ignite.datastorage.persistence-enabled: false
